@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geografia — ENEM & Vestibular</title>
+<style>
+  :root {
+    --verde: #1D9E75;
+    --verde-claro: #E1F5EE;
+    --verde-escuro: #085041;
+    --azul: #378ADD;
+    --azul-claro: #E6F1FB;
+    --azul-escuro: #0C447C;
+    --coral: #D85A30;
+    --coral-claro: #FAECE7;
+    --amber: #BA7517;
+    --amber-claro: #FAEEDA;
+    --roxo: #7F77DD;
+    --roxo-claro: #EEEDFE;
+    --roxo-escuro: #3C3489;
+    --cinza: #5F5E5A;
+    --cinza-claro: #F1EFE8;
+    --texto: #1a1a18;
+    --texto-sec: #5F5E5A;
+    --borda: rgba(0,0,0,0.1);
+    --bg: #ffffff;
+    --bg-sec: #f8f7f4;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --verde: #5DCAA5;
+      --verde-claro: #085041;
+      --verde-escuro: #9FE1CB;
+      --azul: #85B7EB;
+      --azul-claro: #042C53;
+      --azul-escuro: #B5D4F4;
+      --coral: #F0997B;
+      --coral-claro: #4A1B0C;
+      --amber: #EF9F27;
+      --amber-claro: #412402;
+      --roxo: #AFA9EC;
+      --roxo-claro: #26215C;
+      --roxo-escuro: #CECBF6;
+      --cinza: #B4B2A9;
+      --cinza-claro: #2C2C2A;
+      --texto: #f0efe8;
+      --texto-sec: #B4B2A9;
+      --borda: rgba(255,255,255,0.1);
+      --bg: #1c1c1a;
+      --bg-sec: #242420;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--texto);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--verde-escuro);
+    color: #fff;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.03) 40px,
+      rgba(255,255,255,0.03) 80px
+    );
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .hero p {
+    font-size: 1.05rem;
+    opacity: 0.85;
+    max-width: 560px;
+    margin: 0 auto 1.5rem;
+  }
+  .hero-pills {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+    color: #fff;
+  }
+  .hero-pill:hover { background: rgba(255,255,255,0.22); }
+
+  /* NAV TABS */
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 1rem 2rem 0;
+    border-bottom: 1px solid var(--borda);
+    background: var(--bg);
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .nav-tab {
+    padding: 8px 16px;
+    border-radius: 8px 8px 0 0;
+    border: none;
+    background: transparent;
+    color: var(--texto-sec);
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .nav-tab:hover { color: var(--texto); background: var(--bg-sec); }
+  .nav-tab.active {
+    color: var(--verde);
+    border-bottom-color: var(--verde);
+    background: transparent;
+  }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* SECTION PAGES */
+  .section-page { display: none; }
+  .section-page.active { display: block; }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .section-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .section-header p { color: var(--texto-sec); font-size: 0.95rem; }
+
+  /* TOPIC GRID */
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* TOPIC CARD */
+  .topic-card {
+    background: var(--bg);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+  .topic-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .card-header {
+    padding: 1rem 1.25rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--borda);
+  }
+  .card-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .card-header h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .card-tag {
+    margin-left: auto;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-alta { background: var(--coral-claro); color: var(--coral); }
+  .tag-media { background: var(--amber-claro); color: var(--amber); }
+  .tag-base { background: var(--azul-claro); color: var(--azul-escuro); }
+
+  .card-body { padding: 1rem 1.25rem; }
+  .topic-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .topic-list li {
+    font-size: 13.5px;
+    color: var(--texto-sec);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .topic-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--verde);
+    font-size: 12px;
+  }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid;
+  }
+  .highlight-box.verde {
+    background: var(--verde-claro);
+    border-color: var(--verde);
+    color: var(--verde-escuro);
+  }
+  .highlight-box.amber {
+    background: var(--amber-claro);
+    border-color: var(--amber);
+    color: #633806;
+  }
+  .highlight-box.azul {
+    background: var(--azul-claro);
+    border-color: var(--azul);
+    color: var(--azul-escuro);
+  }
+  .highlight-box.coral {
+    background: var(--coral-claro);
+    border-color: var(--coral);
+    color: #4A1B0C;
+  }
+  @media (prefers-color-scheme: dark) {
+    .highlight-box.verde { color: var(--verde-escuro); }
+    .highlight-box.amber { color: var(--amber); }
+    .highlight-box.azul { color: var(--azul-escuro); }
+    .highlight-box.coral { color: var(--coral); }
+  }
+  .highlight-box h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+  }
+  .highlight-box p, .highlight-box ul {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .highlight-box ul { padding-left: 1.2rem; }
+  .highlight-box li { margin-bottom: 4px; }
+
+  /* COMPARISON TABLE */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-bottom: 1.5rem;
+  }
+  .comp-table th {
+    background: var(--bg-sec);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--borda);
+    font-size: 13px;
+    color: var(--texto-sec);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .comp-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--borda);
+    color: var(--texto);
+    vertical-align: top;
+  }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr:hover td { background: var(--bg-sec); }
+
+  /* CRONOGRAMA */
+  .cronograma {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+  .crono-item {
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+    background: var(--bg);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .crono-num {
+    width: 48px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .crono-content {
+    padding: 12px 12px 12px 0;
+    flex: 1;
+  }
+  .crono-content strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .crono-content span {
+    font-size: 13px;
+    color: var(--texto-sec);
+  }
+
+  /* PROGRESS BAR */
+  .progresso-wrap { margin-bottom: 1.5rem; }
+  .prog-item { margin-bottom: 12px; }
+  .prog-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+  .prog-header span:first-child { font-weight: 500; }
+  .prog-header span:last-child { color: var(--texto-sec); }
+  .prog-bar {
+    height: 6px;
+    background: var(--bg-sec);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .prog-fill { height: 100%; border-radius: 6px; transition: width 1s ease; }
+
+  /* FORMULA BOX */
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+  .formula-card {
+    background: var(--bg-sec);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  .formula-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--texto-sec);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .formula-eq {
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    color: var(--verde);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .formula-desc { font-size: 12px; color: var(--texto-sec); }
+
+  /* MAPA MENTAL SIMPLES */
+  .mapa-mental {
+    background: var(--bg-sec);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .mm-central {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--verde);
+    margin-bottom: 1.2rem;
+    padding: 8px 20px;
+    border: 2px solid var(--verde);
+    border-radius: 20px;
+    display: inline-block;
+  }
+  .mm-wrap { text-align: center; }
+  .mm-branches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .mm-branch {
+    background: var(--bg);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .mm-sub {
+    font-size: 11.5px;
+    color: var(--texto-sec);
+    font-weight: 400;
+    margin-top: 3px;
+  }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    padding: 8px 12px;
+    background: var(--bg-sec);
+    border-radius: 8px;
+    border: 1px solid var(--borda);
+  }
+  .check-icon { color: var(--verde); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .check-warn { color: var(--amber); }
+  .check-crit { color: var(--coral); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--texto-sec);
+    font-size: 13px;
+    border-top: 1px solid var(--borda);
+    margin-top: 1rem;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .container { padding: 1rem; }
+    .nav-tabs { padding: 0.75rem 1rem 0; }
+    .hero { padding: 2rem 1rem 1.5rem; }
+    .topic-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">📚 Guia de Estudos</div>
+  <h1>Geografia para ENEM<br>& Vestibular</h1>
+  <p>Os principais temas, cobranças recorrentes e estratégias de revisão para você arrasar na prova.</p>
+  <div class="hero-pills">
+    <a class="hero-pill" href="#" onclick="showTab('geral')">📋 Visão geral</a>
+    <a class="hero-pill" href="#" onclick="showTab('fisica')">🌍 Geo Física</a>
+    <a class="hero-pill" href="#" onclick="showTab('humana')">🏙️ Geo Humana</a>
+    <a class="hero-pill" href="#" onclick="showTab('brasil')">🇧🇷 Brasil</a>
+    <a class="hero-pill" href="#" onclick="showTab('enem')">🎯 Foco ENEM</a>
+    <a class="hero-pill" href="#" onclick="showTab('cronograma')">🗓️ Cronograma</a>
+  </div>
+</div>
+
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab('geral')">Visão Geral</button>
+  <button class="nav-tab" onclick="showTab('fisica')">Geo Física</button>
+  <button class="nav-tab" onclick="showTab('humana')">Geo Humana</button>
+  <button class="nav-tab" onclick="showTab('brasil')">Brasil</button>
+  <button class="nav-tab" onclick="showTab('enem')">Foco ENEM</button>
+  <button class="nav-tab" onclick="showTab('cronograma')">Cronograma</button>
+</div>
+
+<div class="container">
+
+  <!-- =================== VISÃO GERAL =================== -->
+  <div id="tab-geral" class="section-page active">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--verde-claro);">🌐</div>
+      <div>
+        <h2>Visão Geral</h2>
+        <p>Os grandes eixos temáticos e a frequência de cobrança em provas.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box verde">
+      <h4>🎯 Por que Geografia importa tanto?</h4>
+      <p>No ENEM, Geografia aparece em média em <strong>7 a 10 questões</strong> — geralmente misturada com Atualidades, Sociologia e História. Nos vestibulares tradicionais (FUVEST, UNICAMP, UFMG), é uma disciplina inteira com peso alto em questões discursivas.</p>
+    </div>
+
+    <div class="progresso-wrap">
+      <div class="prog-item">
+        <div class="prog-header"><span>Geopolítica e Relações Internacionais</span><span>Alta cobrança</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width: 92%; background: var(--coral);"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span>Questões Ambientais e Climatologia</span><span>Alta cobrança</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width: 88%; background: var(--coral);"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span>Urbanização e Redes Urbanas</span><span>Alta cobrança</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width: 85%; background: var(--coral);"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span>Globalização e Economia</span><span>Alta cobrança</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width: 82%; background: var(--amber);"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span>Geomorfologia e Relevo</span><span>Cobrança média</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width: 68%; background: var(--amber);"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span>Cartografia e Orientação</span><span>Cobrança média</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width: 60%; background: var(--azul);"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span>Hidrografia</span><span>Cobrança média</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width: 55%; background: var(--azul);"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span>Estrutura Geológica</span><span>Cobrança menor</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width: 40%; background: var(--verde);"></div></div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 1rem; margin-bottom: 1rem; font-weight: 600;">Os 4 grandes eixos temáticos</h3>
+    <div class="topic-grid">
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--verde);"></div>
+          <h3>🌍 Geografia Física</h3>
+          <span class="card-tag tag-media">Base</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Geologia, relevo e formações superficiais</li>
+            <li>Climatologia: tipos de clima e fatores</li>
+            <li>Biomas e domínios morfoclimáticos</li>
+            <li>Hidrografia e bacias hidrográficas</li>
+            <li>Pedologia e erosão dos solos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--azul);"></div>
+          <h3>🏙️ Geografia Humana</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Urbanização mundial e brasileira</li>
+            <li>Migrações e fluxos populacionais</li>
+            <li>Globalização e novas geografias</li>
+            <li>Divisão Internacional do Trabalho</li>
+            <li>Conflitos étnicos e religiosos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--coral);"></div>
+          <h3>🌱 Questões Ambientais</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Aquecimento global e mudanças climáticas</li>
+            <li>Desmatamento e biodiversidade</li>
+            <li>Recursos hídricos e crise da água</li>
+            <li>Energia: fontes renováveis e fósseis</li>
+            <li>Conferências e acordos ambientais</li>
+          </ul>
+        </div>
+      </div>
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--roxo);"></div>
+          <h3>🗺️ Geopolítica</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Nova ordem mundial e blocos econômicos</li>
+            <li>Conflitos geopolíticos atuais</li>
+            <li>Terrorismo e geopolítica do petróleo</li>
+            <li>Organizações internacionais (ONU, FMI, OTAN)</li>
+            <li>BRICS e países emergentes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box amber">
+      <h4>💡 Estratégia de estudo</h4>
+      <ul>
+        <li>Comece pelos temas de <strong>alta cobrança</strong>: geopolítica, urbanização e questões ambientais.</li>
+        <li>Leia notícias diariamente — o ENEM cobra atualidades com foco geográfico.</li>
+        <li>Treine leitura de mapas, gráficos e tabelas: são sempre cobrados no ENEM.</li>
+        <li>Para vestibulares, aprofunde a geografia física (Brasil em particular).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- =================== GEO FÍSICA =================== -->
+  <div id="tab-fisica" class="section-page">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--verde-claro);">🌋</div>
+      <div>
+        <h2>Geografia Física</h2>
+        <p>Relevo, clima, hidrografia, solos e biomas — os fundamentos naturais do planeta.</p>
+      </div>
+    </div>
+
+    <div class="topic-grid">
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--coral);"></div>
+          <h3>🏔️ Geomorfologia e Relevo</h3>
+          <span class="card-tag tag-media">Média</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Placas tectônicas: convergentes, divergentes e transformantes</li>
+            <li>Dobramento, falha e vulcanismo</li>
+            <li>Terremotos: distribuição geográfica e escala Richter</li>
+            <li>Tipos de relevo: planície, planalto, depressão, cordilheira</li>
+            <li>Agentes internos (endógenos) e externos (exógenos)</li>
+            <li>Erosão: hídrica, eólica, marinha e glacial</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--azul);"></div>
+          <h3>🌡️ Climatologia</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Fatores do clima: latitude, altitude, correntes marítimas, continentalidade</li>
+            <li>Elementos do clima: temperatura, precipitação, pressão, vento</li>
+            <li>Climas mundiais: tropical, equatorial, árido, temperado, polar</li>
+            <li>El Niño e La Niña: causas e consequências</li>
+            <li>Efeito estufa: gases e impactos</li>
+            <li>Ilhas de calor urbanas</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--verde);"></div>
+          <h3>🌊 Hidrografia</h3>
+          <span class="card-tag tag-media">Média</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Divisão das águas: oceânicas, continentais, subterrâneas</li>
+            <li>Ciclo hidrológico completo</li>
+            <li>Principais rios e bacias mundiais</li>
+            <li>Aquíferos: Guarani (Brasil), Ogallala (EUA)</li>
+            <li>Uso da água: agricultura, indústria, abastecimento</li>
+            <li>Crise hídrica: regiões afetadas no mundo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: #639922;"></div>
+          <h3>🌿 Biomas Mundiais</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Floresta tropical: Amazônia, Congo, Sudeste Asiático</li>
+            <li>Floresta temperada e taiga (boreal)</li>
+            <li>Savanas: Cerrado, Serengeti, Outback</li>
+            <li>Desertos quentes (Saara) e frios (Atacama)</li>
+            <li>Tundra e ambientes polares</li>
+            <li>Oceanos e biodiversidade marinha</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 1rem; margin: 1.5rem 0 1rem; font-weight: 600;">Fatores formadores do clima — resumo</h3>
+    <div class="formula-grid">
+      <div class="formula-card">
+        <div class="formula-label">Latitude</div>
+        <div class="formula-eq">Equador → trópicos → polos</div>
+        <div class="formula-desc">Quanto mais próximo ao equador, maior a incidência solar e temperaturas mais altas.</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-label">Altitude</div>
+        <div class="formula-eq">+100m = −0,65°C</div>
+        <div class="formula-desc">A cada 100m de altitude, a temperatura cai cerca de 0,65°C (gradiente adiabático).</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-label">Correntes marítimas</div>
+        <div class="formula-eq">Quentes → úmidas | Frias → secas</div>
+        <div class="formula-desc">Correntes quentes trazem umidade; correntes frias inibem precipitação (ex: Atacama).</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-label">Continentalidade</div>
+        <div class="formula-eq">Costa → interior</div>
+        <div class="formula-desc">Regiões interiores têm maior amplitude térmica; oceano regula temperaturas costeiras.</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-label">Massas de ar</div>
+        <div class="formula-eq">Frentes frias × quentes</div>
+        <div class="formula-desc">Encontro de massas de ar com temperaturas distintas gera precipitações e frentes.</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-label">Vegetação e solo</div>
+        <div class="formula-eq">Cobertura vegetal → umidade</div>
+        <div class="formula-desc">Florestas criam microclimas úmidos; solos expostos amplificam calor e erosão.</div>
+      </div>
+    </div>
+
+    <div class="highlight-box azul">
+      <h4>🔑 Pontos mais cobrados na geo física</h4>
+      <ul>
+        <li>Relação <strong>El Niño/La Niña</strong> com secas e enchentes no Brasil</li>
+        <li>Efeito estufa: gases (CO₂, CH₄, N₂O), aquecimento global, degelo</li>
+        <li>Distribuição geográfica dos terremotos e vulcões (anel de fogo)</li>
+        <li>Camada de ozônio: buraco, gases CFC, protocolo de Montreal</li>
+        <li>Biomas versus clima: saber associar cada bioma ao seu tipo climático</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- =================== GEO HUMANA =================== -->
+  <div id="tab-humana" class="section-page">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--azul-claro);">🏙️</div>
+      <div>
+        <h2>Geografia Humana</h2>
+        <p>Populações, cidades, economia e geopolítica — onde a humanidade encontra o espaço.</p>
+      </div>
+    </div>
+
+    <div class="topic-grid">
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--azul);"></div>
+          <h3>👥 Demografia e População</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Transição demográfica: fases e causas</li>
+            <li>Taxa de natalidade, mortalidade e crescimento vegetativo</li>
+            <li>Pirâmide etária: leitura e interpretação</li>
+            <li>Distribuição espacial da população mundial</li>
+            <li>Superpopulação × densidade demográfica</li>
+            <li>Envelhecimento populacional (Europa e Japão)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--roxo);"></div>
+          <h3>🚶 Migrações</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Fatores de expulsão e atração (push e pull)</li>
+            <li>Tipos: interna, internacional, forçada, espontânea</li>
+            <li>Refugiados e deslocados: conflitos geradores</li>
+            <li>Migrações no Brasil: histórico e tendências</li>
+            <li>Questão dos imigrantes na Europa e EUA</li>
+            <li>Xenofobia e políticas migratórias</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--amber);"></div>
+          <h3>🌆 Urbanização</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Urbanização mundial: cronologia e disparidades</li>
+            <li>Megalópoles, metrópoles e cidades globais</li>
+            <li>Favelização e periferização nos países subdesenvolvidos</li>
+            <li>Problemas urbanos: trânsito, saneamento, violência</li>
+            <li>Gentrificação e segregação socioespacial</li>
+            <li>Urbanização brasileira: êxodo rural e industrialização</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--coral);"></div>
+          <h3>💹 Economia e Globalização</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Globalização: causas, características e críticas</li>
+            <li>Divisão Internacional do Trabalho (DIT)</li>
+            <li>Países centrais, periféricos e semiperiféricos</li>
+            <li>Blocos econômicos: UE, Mercosul, NAFTA/USMCA, ASEAN</li>
+            <li>Multinacionais e offshoring</li>
+            <li>BRICS, G7 e G20</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--verde);"></div>
+          <h3>🗺️ Geopolítica</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Guerra Fria: bipolaridade e corrida armamentista</li>
+            <li>Nova ordem mundial pós-1991 e multipolaridade</li>
+            <li>Conflitos no Oriente Médio: Palestina, Síria, Iraque</li>
+            <li>Terrorismo: Al-Qaeda, ISIS e geopolítica</li>
+            <li>Conflito Rússia-Ucrânia e OTAN</li>
+            <li>Ascensão da China e disputa EUA × China</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: #1D9E75;"></div>
+          <h3>🌾 Agropecuária e Industria</h3>
+          <span class="card-tag tag-media">Média</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Revolução Verde: impactos positivos e negativos</li>
+            <li>Agronegócio × agricultura familiar</li>
+            <li>Commodities e dependência das economias periféricas</li>
+            <li>Industrialização mundial: 1ª, 2ª e 3ª revoluções industriais</li>
+            <li>Indústria 4.0: automação e IA</li>
+            <li>Zonas de livre comércio e maquiladoras</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 1rem; margin: 1rem 0 1rem; font-weight: 600;">Comparativo: países desenvolvidos × subdesenvolvidos</h3>
+    <div style="overflow-x: auto;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Indicador</th>
+            <th>Países Desenvolvidos</th>
+            <th>Países Subdesenvolvidos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>IDH</strong></td>
+            <td>Acima de 0,8</td>
+            <td>Abaixo de 0,7</td>
+          </tr>
+          <tr>
+            <td><strong>PIB per capita</strong></td>
+            <td>Alto (>US$ 20.000/ano)</td>
+            <td>Baixo a médio</td>
+          </tr>
+          <tr>
+            <td><strong>Estrutura econômica</strong></td>
+            <td>Serviços e indústria de alta tecnologia</td>
+            <td>Commodities, indústria básica</td>
+          </tr>
+          <tr>
+            <td><strong>Taxa de urbanização</strong></td>
+            <td>>80%</td>
+            <td>Variável, crescimento acelerado</td>
+          </tr>
+          <tr>
+            <td><strong>Expectativa de vida</strong></td>
+            <td>>75 anos</td>
+            <td>60–70 anos (média)</td>
+          </tr>
+          <tr>
+            <td><strong>Desigualdade (Gini)</strong></td>
+            <td>Menor (0,25–0,35)</td>
+            <td>Maior (0,40–0,60+)</td>
+          </tr>
+          <tr>
+            <td><strong>Exemplos</strong></td>
+            <td>EUA, Alemanha, Japão, França</td>
+            <td>Brasil, Índia, Angola, Bangladesh</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box coral">
+      <h4>⚠️ Armadilhas comuns em provas</h4>
+      <ul>
+        <li>Confundir <strong>densidade demográfica</strong> com <strong>superpopulação</strong> — o Bangladesh é muito denso mas não superpopuloso economicamente; Austrália é esparsa mas sustentável.</li>
+        <li>Não confundir <strong>urbanização</strong> (% população em cidades) com <strong>industrialização</strong>.</li>
+        <li>BRICS inclui Brasil, Rússia, Índia, China, África do Sul — e agora novos membros (2024).</li>
+        <li>Saber distinguir <strong>migração pendular</strong> (diária, trabalho) das demais.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- =================== BRASIL =================== -->
+  <div id="tab-brasil" class="section-page">
+    <div class="section-header">
+      <div class="section-icon" style="background: #E1F5EE;">🇧🇷</div>
+      <div>
+        <h2>Geografia do Brasil</h2>
+        <p>Temas fundamentais da realidade geográfica brasileira — peso alto em vestibulares nacionais.</p>
+      </div>
+    </div>
+
+    <div class="topic-grid">
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--verde);"></div>
+          <h3>🌿 Biomas Brasileiros</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li><strong>Amazônia:</strong> maior floresta tropical, biodiversidade, desmatamento e pecuária</li>
+            <li><strong>Cerrado:</strong> savana brasileira, nascentes dos grandes rios, agronegócio</li>
+            <li><strong>Caatinga:</strong> bioma exclusivo do Brasil, semiárido, xerófitas</li>
+            <li><strong>Mata Atlântica:</strong> mais devastado, ~12% restante, hotspot de biodiversidade</li>
+            <li><strong>Pampa:</strong> Sul do Brasil, campos gaúchos, pecuária extensiva</li>
+            <li><strong>Pantanal:</strong> maior planície alagável, diversidade animal, ameaças pelo agro</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--azul);"></div>
+          <h3>🏔️ Relevo e Hidrografia</h3>
+          <span class="card-tag tag-media">Média</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Planaltos (maioria do território) × planícies (Amazônica, Pantanal)</li>
+            <li>Serras costeiras: Mar, Geral, Mantiqueira</li>
+            <li>Bacias hidrográficas: Amazônica (maior), Paraná (hidroelétricas), São Francisco</li>
+            <li>Rios: sentido do escoamento, regimes e usos</li>
+            <li>Aquífero Guarani: localização e importância estratégica</li>
+            <li>Potencial hidrelétrico × impacto ambiental</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--amber);"></div>
+          <h3>🌡️ Climas do Brasil</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Equatorial (Amazônia): quente e úmido, sem estação seca</li>
+            <li>Tropical (Centro-Oeste e parte do SE): verão chuvoso, inverno seco</li>
+            <li>Tropical de altitude (serras SE/Sul): temperaturas amenas</li>
+            <li>Semiárido (Nordeste): baixa pluviosidade, irregular, secas</li>
+            <li>Subtropical (Sul): estações definidas, geadas, neve rara</li>
+            <li>Massas de ar que atuam: Equatorial, Tropical Atlântica, Polar Atlântica</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--coral);"></div>
+          <h3>🏙️ Urbanização Brasileira</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Êxodo rural: causas (mecanização, pobreza) e destinos</li>
+            <li>Industrialização concentrada no Sudeste (ABC paulista)</li>
+            <li>Metropolização: São Paulo, Rio, BH como metrópoles nacionais</li>
+            <li>Hierarquia urbana: metrópoles, capitais regionais, centros locais</li>
+            <li>Rede urbana: IBGE e classificação das cidades</li>
+            <li>Favelas, condomínios fechados e segregação urbana</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--roxo);"></div>
+          <h3>🗺️ Regiões Brasileiras</h3>
+          <span class="card-tag tag-media">Média</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Norte: maior em área, menor densidade, amazônia</li>
+            <li>Nordeste: diversidade interna (litoral × sertão), seca × turismo</li>
+            <li>Centro-Oeste: agronegócio, expansão do Cerrado, Brasília</li>
+            <li>Sudeste: maior PIB, concentração industrial, megalópole</li>
+            <li>Sul: colonização europeia, agroindústria, clima subtropical</li>
+            <li>Desigualdades regionais e políticas de desenvolvimento</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: #639922;"></div>
+          <h3>🌾 Agropecuária Brasileira</h3>
+          <span class="card-tag tag-alta">Alta</span>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Brasil como celeiro do mundo: soja, carne, açúcar, café</li>
+            <li>Agronegócio × agricultura familiar e assentamentos</li>
+            <li>Reforma agrária: MST e conflitos fundiários</li>
+            <li>Concentração fundiária: Índice de Gini da terra</li>
+            <li>Pré-sal e matriz energética: etanol, hidrelétricas, petróleo</li>
+            <li>Desmatamento para pastagem e soja: pressões sobre biomas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mapa-mental">
+      <div class="mm-wrap">
+        <div class="mm-central">Questão Agrária Brasileira</div>
+      </div>
+      <div class="mm-branches">
+        <div class="mm-branch">Latifúndio<div class="mm-sub">Concentração de terras, grilagem, herança colonial</div></div>
+        <div class="mm-branch">Reforma Agrária<div class="mm-sub">INCRA, MST, assentamentos, conflitos</div></div>
+        <div class="mm-branch">Agronegócio<div class="mm-sub">Exportação, commodities, mecanização</div></div>
+        <div class="mm-branch">Familiar<div class="mm-sub">PRONAF, segurança alimentar, PNAE</div></div>
+        <div class="mm-branch">Desmatamento<div class="mm-sub">Amazônia, Cerrado, pecuária extensiva</div></div>
+        <div class="mm-branch">Conflitos<div class="mm-sub">Indígenas, quilombolas, sem-terra</div></div>
+      </div>
+    </div>
+
+    <div class="highlight-box verde">
+      <h4>🎯 Destaque: Semiárido nordestino</h4>
+      <p>Tema recorrente no ENEM. Saber: causas das secas (irregularidade das chuvas, não falta absoluta de água), Polígono das Secas, projetos como Transposição do São Francisco, cisterna, convivência com o semiárido. Atenção: caatinga não é deserto!</p>
+    </div>
+  </div>
+
+  <!-- =================== FOCO ENEM =================== -->
+  <div id="tab-enem" class="section-page">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--coral-claro);">🎯</div>
+      <div>
+        <h2>Foco ENEM</h2>
+        <p>O que o ENEM cobra especificamente e como se preparar de forma estratégica.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box coral">
+      <h4>🔥 Como o ENEM cobra Geografia</h4>
+      <p>O ENEM não cobra definições — cobra <strong>interpretação de contextos</strong>. Sempre há um texto, mapa, gráfico ou charge como base. A questão pede que você relacione o dado com um conceito geográfico. Treinar leitura crítica de fontes é tão importante quanto saber o conteúdo.</p>
+    </div>
+
+    <h3 style="font-size: 1rem; margin-bottom: 1rem; font-weight: 600;">Temas mais cobrados no ENEM (últimas 10 edições)</h3>
+
+    <ul class="checklist">
+      <li>
+        <span class="check-icon check-crit">🔴</span>
+        <div><strong>Questões Socioambientais</strong> — Sempre presente. Desmatamento, aquecimento global, energias renováveis, crise hídrica. ENEM adora relacionar com desigualdade social.</div>
+      </li>
+      <li>
+        <span class="check-icon check-crit">🔴</span>
+        <div><strong>Geopolítica atual</strong> — Conflitos recentes, refugiados, tensões EUA × China, petropolítica, blocos econômicos. Exige leitura de notícias.</div>
+      </li>
+      <li>
+        <span class="check-icon check-crit">🔴</span>
+        <div><strong>Urbanização e problemas urbanos</strong> — Segregação, mobilidade, habitação, violência, gentrificação, conurbação.</div>
+      </li>
+      <li>
+        <span class="check-icon check-warn">🟡</span>
+        <div><strong>Globalização e DIT</strong> — Papel dos países periféricos, cadeias produtivas globais, impactos nos trabalhadores.</div>
+      </li>
+      <li>
+        <span class="check-icon check-warn">🟡</span>
+        <div><strong>Migrações internacionais</strong> — Refugiados (Síria, Myanmar, Venezuela), políticas restritivas, xenofobia.</div>
+      </li>
+      <li>
+        <span class="check-icon check-warn">🟡</span>
+        <div><strong>Brasil: biomas e questão agrária</strong> — Desmatamento, conflitos de terra, agronegócio × sustentabilidade.</div>
+      </li>
+      <li>
+        <span class="check-icon">🟢</span>
+        <div><strong>Cartografia</strong> — Leitura de mapas temáticos, escalas, projeções cartográficas, fusos horários.</div>
+      </li>
+      <li>
+        <span class="check-icon">🟢</span>
+        <div><strong>Energia e recursos naturais</strong> — Petróleo, gás, matriz energética brasileira, energias renováveis.</div>
+      </li>
+    </ul>
+
+    <h3 style="font-size: 1rem; margin: 1.5rem 0 1rem; font-weight: 600;">Habilidades BNCC cobradas no ENEM</h3>
+    <div style="overflow-x: auto;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Habilidade</th>
+            <th>O que fazer</th>
+            <th>Exemplo de questão</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Ler mapas e cartogramas</strong></td>
+            <td>Identificar padrões, fluxos, densidades em mapas temáticos</td>
+            <td>Mapa de IDH: identificar desigualdades entre regiões</td>
+          </tr>
+          <tr>
+            <td><strong>Analisar gráficos</strong></td>
+            <td>Interpretar pirâmides etárias, gráficos de barras, tabelas</td>
+            <td>Comparar pirâmides de países desenvolvidos e em desenvolvimento</td>
+          </tr>
+          <tr>
+            <td><strong>Relacionar escala local-global</strong></td>
+            <td>Ver como fenômenos mundiais afetam o local e vice-versa</td>
+            <td>Como a crise de refugiados afeta municípios brasileiros</td>
+          </tr>
+          <tr>
+            <td><strong>Argumentar com dados</strong></td>
+            <td>Usar evidências geográficas para defender uma posição</td>
+            <td>Justificar política de energia renovável com dados do Brasil</td>
+          </tr>
+          <tr>
+            <td><strong>Territórios e conflitos</strong></td>
+            <td>Identificar disputas por território, recursos e poder</td>
+            <td>Geopolítica do petróleo no Oriente Médio</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size: 1rem; margin: 1.5rem 0 1rem; font-weight: 600;">Fusos horários — como resolver no ENEM</h3>
+    <div class="formula-grid">
+      <div class="formula-card">
+        <div class="formula-label">Regra básica</div>
+        <div class="formula-eq">Leste → mais tarde | Oeste → mais cedo</div>
+        <div class="formula-desc">A cada 15° de longitude = 1 hora de diferença. O Sol nasce no Leste.</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-label">Brasil — fusos</div>
+        <div class="formula-eq">UTC-2 | UTC-3 | UTC-4 | UTC-5</div>
+        <div class="formula-desc">UTC-3 é o oficial de Brasília. Fernando de Noronha (UTC-2), AM oeste (UTC-4/5).</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-label">Cálculo</div>
+        <div class="formula-eq">Hora B = Hora A ± ΔFuso</div>
+        <div class="formula-desc">Se avança para Leste, soma. Se avança para Oeste, subtrai. Atenção ao horário de verão.</div>
+      </div>
+    </div>
+
+    <div class="highlight-box amber">
+      <h4>📅 Últimos temas quentes (2022–2025)</h4>
+      <ul>
+        <li>Guerra Rússia-Ucrânia: impactos na energia, alimentos e ordem mundial</li>
+        <li>Crise climática: COP27/28, metas de carbono, perdas e danos</li>
+        <li>Descarbonização e transição energética</li>
+        <li>Crise dos refugiados: Venezuela, Haiti, África</li>
+        <li>Expansão da OTAN e nova geopolítica europeia</li>
+        <li>Desindustrialização e reprimarização da economia brasileira</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- =================== CRONOGRAMA =================== -->
+  <div id="tab-cronograma" class="section-page">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--roxo-claro);">🗓️</div>
+      <div>
+        <h2>Cronograma de Estudos</h2>
+        <p>Um plano de revisão de 8 semanas priorizando os temas de maior impacto nas provas.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box azul">
+      <h4>📋 Como usar este cronograma</h4>
+      <p>Adapte ao seu tempo disponível. O ideal é <strong>1h30 por sessão</strong>. Sempre feche com revisão de questões antigas do ENEM/vestibular sobre o tema do dia. Use o método <strong>ler → resumir → resolver questões → revisar erros</strong>.</p>
+    </div>
+
+    <h3 style="font-size: 1rem; margin-bottom: 1rem; font-weight: 600;">Semanas 1–4: Base e alta frequência</h3>
+    <div class="cronograma">
+      <div class="crono-item">
+        <div class="crono-num" style="background: var(--coral-claro); color: var(--coral);">1</div>
+        <div class="crono-content">
+          <strong>Geopolítica Mundial e Nova Ordem</strong>
+          <span>Guerra Fria, pós-1991, multipolaridade, conflitos ativos, terrorismo, OTAN, China × EUA</span>
+        </div>
+      </div>
+      <div class="crono-item">
+        <div class="crono-num" style="background: var(--amber-claro); color: var(--amber);">2</div>
+        <div class="crono-content">
+          <strong>Questões Ambientais e Clima</strong>
+          <span>Aquecimento global, desmatamento, crise hídrica, biodiversidade, conferências climáticas</span>
+        </div>
+      </div>
+      <div class="crono-item">
+        <div class="crono-num" style="background: var(--coral-claro); color: var(--coral);">3</div>
+        <div class="crono-content">
+          <strong>Urbanização: Brasil e Mundo</strong>
+          <span>Êxodo rural, megalópoles, problemas urbanos, segregação, gentrificação, redes urbanas</span>
+        </div>
+      </div>
+      <div class="crono-item">
+        <div class="crono-num" style="background: var(--amber-claro); color: var(--amber);">4</div>
+        <div class="crono-content">
+          <strong>Globalização e Economia Mundial</strong>
+          <span>DIT, blocos econômicos, BRICS, desigualdade Norte-Sul, multinacionais, commodities</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 1rem; margin-bottom: 1rem; font-weight: 600;">Semanas 5–8: Aprofundamento e revisão</h3>
+    <div class="cronograma">
+      <div class="crono-item">
+        <div class="crono-num" style="background: var(--azul-claro); color: var(--azul-escuro);">5</div>
+        <div class="crono-content">
+          <strong>Geografia do Brasil: Biomas e Recursos</strong>
+          <span>6 biomas, hidrografia, semiárido, Amazônia, questão energética e agropecuária</span>
+        </div>
+      </div>
+      <div class="crono-item">
+        <div class="crono-num" style="background: var(--azul-claro); color: var(--azul-escuro);">6</div>
+        <div class="crono-content">
+          <strong>População e Migrações</strong>
+          <span>Transição demográfica, pirâmides etárias, migrações internas e internacionais, refugiados</span>
+        </div>
+      </div>
+      <div class="crono-item">
+        <div class="crono-num" style="background: var(--verde-claro); color: var(--verde-escuro);">7</div>
+        <div class="crono-content">
+          <strong>Climatologia e Geomorfologia</strong>
+          <span>Climas do Brasil e do mundo, relevo, El Niño/La Niña, agentes modeladores</span>
+        </div>
+      </div>
+      <div class="crono-item">
+        <div class="crono-num" style="background: var(--verde-claro); color: var(--verde-escuro);">8</div>
+        <div class="crono-content">
+          <strong>Cartografia + Simulado Final</strong>
+          <span>Projeções, escalas, fusos horários + resolver 50 questões de vestibular/ENEM completas</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 1rem; margin: 1.5rem 0 1rem; font-weight: 600;">Recursos recomendados</h3>
+    <div class="topic-grid">
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--azul);"></div>
+          <h3>📰 Manter-se atualizado</h3>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>BBC Brasil, Nexo Jornal, El País Brasil</li>
+            <li>Agência IBGE Notícias (dados populacionais)</li>
+            <li>INPE (desmatamento, clima)</li>
+            <li>Podcasts: Café da Manhã (Folha), O Assunto (G1)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--verde);"></div>
+          <h3>📚 Questões para praticar</h3>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Questões comentadas ENEM (2010–2024): enem.inep.gov.br</li>
+            <li>Banco de questões FUVEST, UNICAMP, UFMG</li>
+            <li>Plataformas: Khan Academy (geo), Descomplica, QConcursos</li>
+            <li>Simulados coletivos: ENEM de bolso, Me Salva!</li>
+          </ul>
+        </div>
+      </div>
+      <div class="topic-card">
+        <div class="card-header">
+          <div class="card-dot" style="background: var(--roxo);"></div>
+          <h3>🗺️ Materiais de apoio</h3>
+        </div>
+        <div class="card-body">
+          <ul class="topic-list">
+            <li>Atlas geográfico escolar (IBGE) — grátis online</li>
+            <li>Google Earth: visualização de biomas e relevos</li>
+            <li>Mapas temáticos: gapminder.org</li>
+            <li>Infográficos do IBGE: cidades.ibge.gov.br</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box verde">
+      <h4>✅ Checklist da semana do ENEM</h4>
+      <ul>
+        <li>Revisar mapas temáticos das últimas questões erradas</li>
+        <li>Reler resumos de geopolítica (atualidades do ano)</li>
+        <li>Resolver 1 prova completa de Geografia em tempo real</li>
+        <li>Dormir bem e não estudar matéria nova na véspera</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  Conteúdo elaborado para estudo — ENEM e Vestibulares | Sempre complemente com as últimas edições das provas
+</div>
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.section-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  const tabs = document.querySelectorAll('.nav-tab');
+  const map = { geral: 0, fisica: 1, humana: 2, brasil: 3, enem: 4, cronograma: 5 };
+  if (tabs[map[name]]) tabs[map[name]].classList.add('active');
+  window.scrollTo({ top: document.querySelector('.nav-tabs').offsetTop - 10, behavior: 'smooth' });
+}
+
+// Animate progress bars on load
+window.addEventListener('load', () => {
+  const fills = document.querySelectorAll('.prog-fill');
+  fills.forEach(f => {
+    const w = f.style.width;
+    f.style.width = '0';
+    setTimeout(() => { f.style.width = w; }, 200);
+  });
+});
+</script>
+</body>
+</html>
